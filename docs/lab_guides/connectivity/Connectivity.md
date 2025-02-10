@@ -6,9 +6,12 @@ Connectivity to the lab will be via Cisco Secure Client to an instance specific 
 
 ## VPN Connectivity
 
-You can enter the information directly into the Secure Client or via terminal using the below syntax:
+Open the Secure Client :
 
-url = https://devnetsandbox-usw1-reservation.cisco.com:[port_number]
+**Address:** https://devnetsandbox-usw1-reservation.cisco.com:[port_number]
+**username:** Provided in the presentation
+**Credentials:** Provided below
+**Port Number:** Provided below
 
 ## Pod Info
 
