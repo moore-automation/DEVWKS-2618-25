@@ -8,10 +8,10 @@ Connectivity to the lab will be via Cisco Secure Client to an instance specific 
 
 Open the Secure Client :
 
-**Address:** https://devnetsandbox-usw1-reservation.cisco.com:[port_number]
-**username:** Provided in the presentation
-**Credentials:** Provided below
-**Port Number:** Provided below
+-  **Address:** https://devnetsandbox-usw1-reservation.cisco.com:[port_number]
+-  **username:** Provided in the presentation
+-  **Credentials:** Provided below
+-  **Port Number:** Provided below
 
 ## Pod Info
 
