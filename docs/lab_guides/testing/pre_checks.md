@@ -19,7 +19,7 @@ There are many types of testing we can perform within our pipelines, in this sec
 
 ## Task 6: Add linting to pipeline
 
-!!!note "xmllint"
+???note "**Reminder:*** What is xmllint"
     xmllint is a command-line XML tool used for parsing and validating XML documents, ensuring they are well-formed and adhere to their associated XML Schema Definition (XSD) or Document Type Definition (DTD). It also offers capabilities for formatting, querying, and extracting data from XML files, making it a versatile utility for XML manipulation and debugging.
 
 Pre-commits are a handy feature where we can test aspects of our code before the commit is executed. We use this for adding sshpass to the runner as an additional tool to the standard build. The code below performs a syntax check of our loopback template without any output upon success. Add it to our existing .pre stage or create a new job to execute the command. 

@@ -4,7 +4,7 @@ Now we've added some simple tests we're going to go straight into deploying our 
 
 ## Task 6: Apply NSO Service 
 
-!!!note "**Reminder:** RESTCONF"
+???note "**Reminder:** RESTCONF"
     Cisco NSO uses RESTCONF to provide a standardized, RESTful API interface for interacting with network configurations and services.
     
 	  -	RESTCONF is a RESTful protocol for accessing and manipulating network configuration data defined in YANG models.

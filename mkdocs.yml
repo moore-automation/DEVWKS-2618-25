@@ -10,7 +10,7 @@ nav:
   - Workshop Guide:
     - Create the CI/CD pipeline: lab_guides/pipeline/Dummy_Pipeline.md
     - Pipeline-Driven NSO Service Development: lab_guides/pipeline/Deploy_Pipeline.md
-    - Adding Compliance to the Pipeline: lab_guides/testing/pre_checks.md
+    - Adding Pre-Checks to the Pipeline: lab_guides/testing/pre_checks.md
     - Applying a Service to a Device: lab_guides/pipeline/apply.md
     - Compliance Reporting: lab_guides/testing/compliance_reporting.md
     - Conclusion: Conclusion.md

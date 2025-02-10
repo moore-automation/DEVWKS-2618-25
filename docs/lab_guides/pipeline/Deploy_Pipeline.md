@@ -6,7 +6,7 @@ The pipeline will also automate the deployment of the package service in the NSO
 
 ## Task 3: Create a Test Branch
 
-!!! info "**Reminder:** What is a branch?"
+??? info "**Reminder:** What is a branch?"
     
     In Git, a branch is a lightweight, movable pointer to a commit. Branches are used to create separate lines of development within a repository, allowing you to work on different features, bug fixes, or experiments simultaneously without affecting the main codebase. Branches in Git provide a flexible and efficient way to manage code changes, enabling parallel development and easy collaboration. They are central to most version control workflows, allowing developers to experiment and innovate without disrupting stable code.
     
@@ -28,7 +28,7 @@ You now should have a new branch called `package_dev_demo` and should be working
 
 ## Task 4: Update NSO loopback template
 
-!!! info  "**Reminder:** What is a template and is it different to a model?"
+??? info  "**Reminder:** What is a template and is it different to a model?"
 
     Together, YANG models and templates enable the full lifecycle management of network services-from design and deployment to monitoring and troubleshooting. This combination allows network operators to define services once and deploy them consistently across diverse network environments, scaling operations efficiently. YANG models and templates are integral to NSO's automation capabilities, allowing for rapid deployment and modification of network services, reducing the need for manual intervention.
     
