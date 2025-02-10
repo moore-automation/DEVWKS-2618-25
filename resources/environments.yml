@@ -1,0 +1,14 @@
+# NSO-cicd-automated testing
+# Author: @daquezad
+#
+
+variables:
+    NSO_TESTING_URL:  "http://10.10.20.47:8080/"
+    NSO_DEVELOPMENT_URL:  "http://10.10.20.47:8080/"
+    NSO_PRODUCTION_URL: "http://10.10.20.47:8080/"
+    NSO_DEV_PWD: "C1sco12345"
+    NSO_PROD_PWD: "C1sco12345"
+    NSO_DEV_USER: "developer"
+    NSO_DEV_IP: "10.10.20.47"
+    NSO_PROD_IP: "10.10.20.48"
+    PACKAGE: "loopback"

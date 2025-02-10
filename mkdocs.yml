@@ -1,0 +1,70 @@
+site_name: 'Keeping Compliant with Open-Source Automation and NSO  .ı|ı.ı|ı.'
+site_description: DEVWKS-2618 Workshop
+site_author: Ed Moore, David Quezada & Jorge Mira
+
+nav:
+  - Home: index.md
+  - Get Connected:
+    - Connectivity: lab_guides/connectivity/Connectivity.md
+    - Sandbox Access: lab_guides/connectivity/Access.md
+  - Workshop Guide:
+    - Create the CI/CD pipeline: lab_guides/pipeline/Dummy_Pipeline.md
+    - Pipeline-Driven NSO Service Development: lab_guides/pipeline/Deploy_Pipeline.md
+    - Adding Compliance to the Pipeline: lab_guides/testing/pre_checks.md
+    - Applying a Service to a Device: lab_guides/pipeline/apply.md
+    - Compliance Reporting: lab_guides/testing/compliance_reporting.md
+    - Conclusion: Conclusion.md
+
+
+
+theme:
+  name: material
+  logo: assets/logo.png
+  features:
+    - navigation.tabs
+    - navigation.footer
+    - toc.follow
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - content.code.select
+
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: teal
+      accent: purple
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: teal
+      accent: lime
+
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+
+
+copyright: |
+  &copy; 2024 <a href="https://cisco.com"  target="_blank" rel="noopener">Cisco Systems, Inc.</a>
