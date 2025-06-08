@@ -12,7 +12,12 @@ runner pre-reqs:
   stage: .pre
   when: on_success
   script:
-    - apt update && apt install sshpass -y
+    - echo "(Pre-reqs) Checking the environment"
+    - python --version
+    - pipx install robotframework-sshlibrary --include-deps --force
+    - sshpass -p "$NSO_DEV_PWD" ssh -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_DEV_IP "echo 'NSO Dev Environment Accessible'"
+    - sshpass -p "$NSO_PROD_PWD" ssh -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_PROD_IP "echo 'NSO Prod Environment Accessible'"
+
 
 # Step to compile the package in the development NSO environment
 package-compilation-🔨:
@@ -28,10 +33,16 @@ package-compilation-🔨:
     - sshpass -p "$NSO_DEV_PWD" ssh -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_DEV_IP "
           cd /home/developer/ &&
           cp -r $PACKAGE /nso/run/packages &&
-          source /opt/ncs/ncs-6.2.5/ncsrc &&
+          source /opt/ncs/ncs-6.4.4/ncsrc &&
           cd /nso/run/packages/$PACKAGE/src &&
           make clean &&
           make"
+  artifacts:
+    paths:
+      - nso_cicd/packages/$PACKAGE
+    expire_in: 1h
+  dependencies:
+    - runner pre-reqs
 
 # Step to load the compiled package into the testing NSO environment
 package-load-📥:
@@ -43,8 +54,10 @@ package-load-📥:
     - echo "(Build 📥) Loading compiled packages to testing env NSO"
     # SSH into the NSO development environment and reload the package
     - sshpass -p "$NSO_DEV_PWD" ssh -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_DEV_IP "
-      source /opt/ncs/ncs-6.2.5/ncsrc && 
+      source /opt/ncs/ncs-6.4.4/ncsrc &&
       echo 'packages reload' | ncs_cli -Cu admin"
+  dependencies:
+    - package-compilation-🔨
 
 # Step to test the loopback service in the NSO testing environment
 test-loopback-service-🕵🏽:
@@ -56,10 +69,12 @@ test-loopback-service-🕵🏽:
     - echo "(Test 🕵🏽) Deploying service in the NSO test env"
     # Test the service on an IOS-XR device
     - echo "Test IOS-XR"
-    - cd nso_cicd/tests/loopback-test && python3 loopback-test.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-core-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
+    - cd nso_cicd/tests/loopback-test && python loopback-test.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-core-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
     # Test the service on an IOS device
     - echo "Test IOS"
-    - python3 loopback-test.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-dist-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
+    - python loopback-test.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-dist-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
+  dependencies:
+    - package-load-📥
 
 # Step to generate and publish the release package
 release-publishing-📦:
@@ -68,13 +83,21 @@ release-publishing-📦:
   except:
     - main
   script:
-  - echo "(Deliver 📦) Generating zip" && 
+  - echo "(Deliver 📦) Generating zip" &&
    rm -rf package-artifact/$PACKAGE && 
    mkdir -p package-artifact
-  # Copy the package from the NSO development environment to the local directory and create a tarball
-  - sshpass -p "$NSO_DEV_PWD" scp -o StrictHostKeyChecking=no -r $NSO_DEV_USER@$NSO_DEV_IP:/nso/run/packages/$PACKAGE $PWD/package-artifact/$PACKAGE/ &&
-    cd package-artifact/ && touch nso-package_$PACKAGE_$CI_COMMIT_REF_NAME.tar.gz && ls &&
-    tar -czvf nso-package_$PACKAGE_$CI_COMMIT_REF_NAME.tar.gz . 
+  # After compiling, create the tarball on NSO_DEV_IP
+  - sshpass -p "$NSO_DEV_PWD" ssh -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_DEV_IP "
+      cd /nso/run/packages &&
+      tar -czvf /home/developer/nso-package_$PACKAGE.tar.gz $PACKAGE"
+  # Copy the tarball back to the CI runner
+  - sshpass -p "$NSO_DEV_PWD" scp -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_DEV_IP:/home/developer/nso-package_$PACKAGE.tar.gz package-artifact/
+  artifacts:
+    when: on_success
+    paths:
+     - $CI_PROJECT_DIR/package-artifact/nso-package_$PACKAGE.tar.gz
+  dependencies:
+    - test-loopback-service-🕵🏽
 
 apply_service-📦:
   stage: deliver
@@ -83,15 +106,11 @@ apply_service-📦:
     - echo "Apply IOS"
     - python3 nso_cicd/tests/loopback-test/apply.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-dist-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
 
-  artifacts:
-    when: on_success
-    paths:
-     - $CI_PROJECT_DIR/package-artifact/nso-package_$PACKAGE_$CI_COMMIT_REF_NAME.tar.gz
-
 # Step to clean up the development environment
 cleanup-🗑️:
   stage: .post
-  when: always
+  only:
+    - main
   allow_failure: true
   script:
     - echo "(Cleanup 🗑️) Removing files from NSO Dev"
@@ -99,8 +118,9 @@ cleanup-🗑️:
     - sshpass -p "$NSO_DEV_PWD" ssh -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_DEV_IP "
       rm -rf $PACKAGE &&
       rm -rf cd /nso/run/packages/$PACKAGE &&
-      source /opt/ncs/ncs-6.2.5/ncsrc && echo 'packages reload force' | ncs_cli -Cu admin"
-
+      source /opt/ncs/ncs-6.4.4/ncsrc && echo 'packages reload force' | ncs_cli -Cu admin"
+  dependencies:
+    - release-publishing-📦
 
 # Step to deploy the package to the production NSO environment
 deploy-production-📬:
@@ -110,16 +130,15 @@ deploy-production-📬:
     - main
   script:
     - echo "(Deploy📬) Deployment in production."
-    - cd package-artifact/ && ls
-    # Copy the package tarball to the NSO production environment
-    - sshpass -p "$NSO_PROD_PWD" scp -o StrictHostKeyChecking=no -r nso-package_$PACKAGE_$CI_COMMIT_REF_NAME.tar.gz $NSO_PROD_USER@$NSO_PROD_IP:/home/developer/nso-package_$PACKAGE_$CI_COMMIT_REF_NAME.tar.gz
+    # Copy the tarball from CI runner to NSO_PROD_IP
+    - sshpass -p "$NSO_PROD_PWD" scp -o StrictHostKeyChecking=no package-artifact/nso-package_$PACKAGE.tar.gz $NSO_DEV_USER@$NSO_PROD_IP:/home/developer/    
     # SSH into the NSO production environment, extract the tarball, and reload the package
-    - sshpass -p "$NSO_PROD_PWD" ssh -o StrictHostKeyChecking=no $NSO_PROD_USER@$NSO_PROD_IP "
+    - sshpass -p "$NSO_PROD_PWD" ssh -o StrictHostKeyChecking=no $NSO_DEV_USER@$NSO_PROD_IP "
         cd /home/developer/ &&
-        tar -xvf nso-package_$PACKAGE_$CI_COMMIT_REF_NAME.tar.gz &&
-        rm -rf *.tar.gz &&
+        tar -xvf nso-package_$PACKAGE.tar.gz &&
+        rm -rf nso-package_$PACKAGE.tar.gz &&
         cp -r $PACKAGE /nso/run/packages/loopback &&
-        source /opt/ncs/ncs-6.2.5/ncsrc &&    
+        source /opt/ncs/ncs-6.4.4/ncsrc &&    
         cd /nso/run/packages/$PACKAGE/src &&      
         make clean &&
         make &&
