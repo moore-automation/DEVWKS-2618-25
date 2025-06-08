@@ -1,7 +1,7 @@
 
 # Workshop Access & Login
 ## Verification
-- **Access GitLab**: Open a web browser and navigate to [http://devtools-gitlab.lab.devnetsandbox.local](http://devtools-gitlab.lab.devnetsandbox.local) to access the GitLab UI. Log in with username `developer` and password `C1sco12345`.
+- **Access GitLab**: All the bookmarks for this sessions are available in Google Chrome, select DEVWKS-2618 Bookmark folder and Web IDE. (You can also  navigate to [http://devtools-gitlab.lab.devnetsandbox.local](http://devtools-gitlab.lab.devnetsandbox.local) to access the GitLab UI.) Log in with username `developer` and password `C1sco12345`.
 
 ![GitLab login page](../../assets/Gitlab-login.png)
 
@@ -67,10 +67,10 @@ internet-rtr01   10.10.20.181  -            cisco-ios-cli-6.106   unlocked
 ### View devices in the NSO GUI 
 ---
 
-Open a web browser to connect to [http://10.10.20.47:8080/](http://10.10.20.47:8080/) Log in using the username `developer` and password `C1sco12345`.
+Select the NSO bookmark in Google Chrome or navigate to [http://10.10.20.47:8080/](http://10.10.20.47:8080/) Log in using the username `developer` and password `C1sco12345`.
 
-1. Open your browser and navigate to the Device Manager tab to view the devices.
-2. To ensure all devices are operational and correctly onboarded to NSO, select each device and run the Connect action.
+1. Navigate to the Device Manager tab to view the devices.
+2. Ensure all devices are operational and correctly onboarded to NSO: select each device and run the Connect action.
 
 ![NSO Device Manager](../../assets/nso-devices.png)
 

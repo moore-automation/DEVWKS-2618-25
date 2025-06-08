@@ -1,20 +1,20 @@
-# Applying our Service
+# Applying Our Service
 
-Now we've added some simple tests we're going to go straight into deploying our Service!
+Now that we've added some basic tests, let's move straight into deploying our service!
 
-## Task 6: Apply NSO Service 
+## Task 6: Apply the NSO Service
 
-???note "**Reminder:** RESTCONF"
+??? note "**Reminder:** RESTCONF"
     Cisco NSO uses RESTCONF to provide a standardized, RESTful API interface for interacting with network configurations and services.
     
-	  -	RESTCONF is a RESTful protocol for accessing and manipulating network configuration data defined in YANG models.
-	  -	It provides a standardized HTTP-based interface for retrieving, configuring, and monitoring network settings.
-	  -	Utilizes standard HTTP methods (GET, POST, PUT, DELETE) for operations and supports JSON or XML for data representation.
-	  -	Aims to simplify network management with consistent interaction across diverse network elements.
+    - RESTCONF is a RESTful protocol for accessing and manipulating network configuration data defined in YANG models.
+    - It provides a standardized HTTP-based interface for retrieving, configuring, and monitoring network settings.
+    - Utilizes standard HTTP methods (GET, POST, PUT, DELETE) for operations and supports JSON or XML for data representation.
+    - Aims to simplify network management with consistent interaction across diverse network elements.
 
-Below we've provided a basic python script to apply the service to our chosen device 'dev-dist-rtr01' - please create a file `apply.py` within the `nso_cicd` directory with the below contents. In the below file we're authenticating with the NSO development instance and applying the loopback service with a statically defined address of 10.100.66.1 - this will of course cause us some issues in the real-world!
+Below is a basic Python script to apply the service to the device `dev-dist-rtr01`. Please create a file named `apply.py` within the `nso_cicd` directory and copy the following contents into it. This script authenticates with the NSO development instance and applies the loopback service with a statically defined address of `10.100.66.1`. (Note: In a real-world scenario, using a static address like this could cause conflicts!)
 
-```python 
+```python
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
@@ -51,7 +51,7 @@ HEADERS = {
 }
 
 # Define the service payload
-def apply_service( ):
+def apply_service():
     payload = json.dumps({
         "loopback:loopback": [
             {
@@ -68,19 +68,17 @@ def apply_service( ):
         print('Successfully applied service to device')
         print(response.status_code)
     else:
-        print(f'Failed to apply service: {response.status_code} {response.text}')    
+        print(f'Failed to apply service: {response.status_code} {response.text}')
 
 if __name__ == "__main__":
     apply_service()
-
 ```
 
-## Task 7: Update Pipeline to apply 
+## Task 7: Update the Pipeline to Apply the Service
 
-Next we're going to add the task of applying the service to `dev-dist-rtr01' - update the pipelin to apply the service as below:
+Next, let's add a task to the pipeline to apply the service to `dev-dist-rtr01`. Update your pipeline as shown below:
 
-
-```yml
+```yaml
 apply_service-📦:
   stage: deliver
   when: on_success
@@ -89,4 +87,4 @@ apply_service-📦:
     - python3 nso_cicd/apply.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-dist-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
 ```
 
-!!!question "Has the configuration been applied to the device correctly?"
+!!! question "Has the configuration been applied to the device correctly?"
