@@ -51,17 +51,17 @@ show devices list
 
 Expected output:
 ```
-NAME             ADDRESS       DESCRIPTION  NED ID                ADMIN STATE
------------------------------------------------------------------------------
-core-rtr01       10.10.20.173  -            cisco-iosxr-cli-7.55  unlocked
-dev-core-rtr01   10.10.20.174  -            cisco-iosxr-cli-7.55  unlocked
-dev-dist-rtr01   10.10.20.176  -            cisco-ios-cli-6.106   unlocked
-dev-dist-sw01    10.10.20.178  -            cisco-nx-cli-5.25     unlocked
-dist-rtr01       10.10.20.175  -            cisco-ios-cli-6.106   unlocked
-dist-sw01        10.10.20.177  -            cisco-nx-cli-5.25     unlocked
-edge-firewall01  10.10.20.171  -            cisco-asa-cli-6.18    unlocked
-edge-sw01        10.10.20.172  -            cisco-ios-cli-6.106   unlocked
-internet-rtr01   10.10.20.181  -            cisco-ios-cli-6.106   unlocked
+NAME             ADDRESS       DESCRIPTION  NED ID
+----------------------------------------------------------------
+core-rtr01       10.10.20.173  -            cisco-iosxr-cli-7.65
+dev-core-rtr01   10.10.20.174  -            cisco-iosxr-cli-7.65
+dev-dist-rtr01   10.10.20.176  -            cisco-ios-cli-6.109
+dev-dist-sw01    10.10.20.178  -            cisco-nx-cli-5.27
+dist-rtr01       10.10.20.175  -            cisco-ios-cli-6.109
+dist-sw01        10.10.20.177  -            cisco-nx-cli-5.27
+edge-firewall01  10.10.20.171  -            cisco-asa-cli-6.18
+edge-sw01        10.10.20.172  -            cisco-ios-cli-6.109
+internet-rtr01   10.10.20.181  -            cisco-ios-cli-6.109
 ```
 
 ### View devices in the NSO GUI 
@@ -72,6 +72,6 @@ Select the NSO bookmark in Google Chrome or navigate to [http://10.10.20.47:8080
 1. Navigate to the Device Manager tab to view the devices.
 2. Ensure all devices are operational and correctly onboarded to NSO: select each device and run the Connect action.
 
-![NSO Device Manager](../../assets/nso-devices.png)
+![NSO Device Manager](../../assets/nso-devices.jpg)
 
 If all steps are executed correctly, you will have completed the verification of your working environment.

@@ -115,5 +115,3 @@ deploy-production-📬:
         echo 'packages reload' | ncs_cli -Cu admin"
   dependencies:
     - load-production-📦
-
-retry: 2

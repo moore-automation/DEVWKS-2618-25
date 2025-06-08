@@ -15,7 +15,7 @@ Now that we've added some basic tests, let's move straight into deploying our se
 Below is a basic Python script to apply the service to the device `dev-dist-rtr01`. Please create a file named `apply.py` within the `nso_cicd` directory and copy the following contents into it. This script authenticates with the NSO development instance and applies the loopback service with a statically defined address of `10.100.66.1`. (Note: In a real-world scenario, using a static address like this could cause conflicts!)
 
 ```python
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 import requests
@@ -84,7 +84,7 @@ apply_service-📦:
   when: on_success
   script:
     - echo "Apply IOS"
-    - python3 nso_cicd/apply.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-dist-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
+    - python nso_cicd/apply.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-dist-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
 ```
 
 !!! question "Has the configuration been applied to the device correctly?"

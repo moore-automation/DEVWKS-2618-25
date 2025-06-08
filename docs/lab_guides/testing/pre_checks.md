@@ -32,7 +32,7 @@ Pre-commits are a handy feature where we can test aspects of our code before the
 Robot Framework is an open-source automation framework designed for acceptance testing and robotic process automation (RPA). It uses a keyword-driven approach to create readable and reusable test cases and supports various external libraries for testing different types of applications and systems. We're going to use it to run some show commands and perform a config backup. 
 
 
-Create a robot file in the ``nso_cicd/` folder named `pre_check.robot` using the code provided below then add the below line to the gitlab ci to be executed after the linting step above
+Create a robot file in the ``nso_cicd/` folder named `pre_check.robot` using the code provided below:
 
 
 ```robotframework
@@ -82,10 +82,10 @@ Open Connections And Log In
         Login               ${USERNAME}    ${PASSWORD}
     END
 ```
-
+Now let's add this to our pipeline. Add the following code to the `.pre` stage of your `.gitlab-ci.yml` file:
 
 ```yml
-- python3 -m robot nso_cicd/pre_check.robot
+- python -m robot nso_cicd/pre_check.robot
 ```
 
 !!!question "What was the outcome of the .pre stage.?"

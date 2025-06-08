@@ -205,8 +205,6 @@ deploy-production-📬:
         echo 'packages reload' | ncs_cli -Cu admin"
   dependencies:
     - load-production-📦
-
-retry: 2
 ```
 > **Note:** For more details on the pipeline configuration, see the GitLab [documentation](https://docs.gitlab.com/ee/ci/yaml/).
 
@@ -219,6 +217,6 @@ This process may take a few minutes to complete. While the stages are running, r
 !!! question "Is the loopback service available in the development NSO instance?"
 
 <!-- todo: add picture of the stage and show the message why it fail -->
-![Results pipeline NSO](../../assets/04_Gitlab-pipeline-fail.png)
+![Results pipeline NSO](../../assets/Gitlab-Test-Success.jpg)
 
 
