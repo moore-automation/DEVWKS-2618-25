@@ -49,8 +49,8 @@ Here's a brief outline of the dCloud setup used for this lab:
 
 - **Access:** Connect through a Cisco Secure Client VPN, with details provided by your breakout proctor.
 - **Network Setup:** Two Cisco Modeling Labs (CML) environments are available—one simulates the live network, and the other is for testing.
-  - **Production NSO:** The main NSO deployment manages network devices within the CML.
+- **Development & Production NSO:** The main NSO deployment manages network devices within the CML.
 - **Developer Workstation (DevBox):** A Linux VM for developing new services, running tests, and initiating pipelines.
 - **Developer Tools (DevTools):** Another Linux VM equipped with various tools needed for lab activities.
 
-![Lab Topology](assets/topology_lab.jpg)
+![Lab Topology](docs/assets/topology_lab.jpg)
