@@ -1,10 +1,8 @@
-# Compliance Reporting 
+# Compliance Reporting
 
+An important step in gaining acceptance of newly automated processes is providing visibility and assurance of their success. NSO Compliance Reporting is a feature within Cisco NSO that helps network operators assess and ensure that network device configurations adhere to predefined policies and standards. It enables automated auditing and reporting on compliance status across network elements, making it easier to identify and remediate configuration drift and inconsistencies in a timely manner.
 
-An important step to gaining acceptance of newly automated processes is visibility and assurance of the processes success. NSO Compliance Reporting is a feature within Cisco NSO that helps network operators assess and ensure network device configurations adhere to predefined policies and standards. It enables automated auditing and reporting on compliance status across network elements, facilitating timely identification and remediation of configuration drift and inconsistencies.
-
-Create a shell script in the ``nso_cicd/` folder named `compliance.sh` using the code provided below, then add the below line to the gitlab ci to be executed after the apply script in the apply_service job.
- 
+To get started, create a Python script in the `nso_cicd/` folder named `compliance.py` using the code provided below. Then, add the following line to your GitLab CI pipeline to execute the script after the apply script in the `apply_service` job.
 
 ```python
 #!/usr/bin/env python3
@@ -121,11 +119,12 @@ if __name__ == "__main__":
         outformat=args.outformat
     )
     logging.info("Compliance report process completed.")
-
 ```
+
+Add the following line to your `.gitlab-ci.yml` file to run the compliance check after applying the service:
 
 ```yaml
 - python nso_cicd/compliance.py --nso_url "http://$NSO_DEV_IP:8080" --username $NSO_DEV_USER --password $NSO_DEV_PWD
 ```
 
-Commit your changes and congratulations you've completed the workshop!
+Commit your changes. Congratulations—you've completed the workshop!
