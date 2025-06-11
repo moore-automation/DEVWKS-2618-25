@@ -5,7 +5,7 @@ An important step in gaining acceptance of newly automated processes is providin
 To get started, create a Python script in the `nso_cicd/` folder named `compliance.py` using the code provided below. Then, add the following line to your GitLab CI pipeline to execute the script after the apply script in the `apply_service` job.
 
 ```python
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 import requests

@@ -12,10 +12,15 @@ The pipeline will also automate the deployment of the package service in the NSO
     
     **Key Concepts:**
     - **Default Branch:** The main line of development, usually called `main` or `master`.
+
     - **Feature Development:** Create new branches for each feature, bug fix, or task. This isolates changes from the main branch until they're ready to be merged.
+
     - **Branch Creation:** Use `git branch` or `git checkout -b` to create and switch to a new branch.
+
     - **Switching Branches:** Use `git checkout` to switch between branches.
+
     - **Merging:** Once work is complete and tested, merge the branch back into another branch (typically `main`) using `git merge`.
+
     - **Collaboration:** Multiple developers can work on their own branches and merge changes into shared branches as needed.
 
 Creating a test branch allows you to make changes safely without impacting the production NSO service package stored in the main branch. By committing and pushing changes to this test branch in GitLab, the pipeline will automatically compile, test, and deploy the NSO package to the development environment and execute the test scripts. You can then review the pipeline's pass/fail status to ensure your changes are successful.
@@ -32,8 +37,11 @@ You should now have a new branch called `package_dev_demo` and be working on tha
     
     **Key Concepts:**
     - **Configuration Generation:** Templates in NSO generate device-specific configuration snippets from the abstract service definitions provided by YANG models.
+
     - **Device-Specific Customization:** While YANG models define the abstract structure, templates handle the nuances of various device types and vendors, allowing NSO to push the correct configurations to different devices.
+
     - **Separation of Concerns:** Templates separate service logic from device-specific syntax, making maintenance and updates easier.
+
     - **Reusable Components:** Templates can be reused across different services, promoting consistency and reducing duplication.
 
 To complete the development of the Loopback service and ensure all tests pass, modify the file `loopback-template.xml` located in `/nso_cicd/packages/loopback/templates`. Include the XML configurations as specified below, making sure they match exactly:

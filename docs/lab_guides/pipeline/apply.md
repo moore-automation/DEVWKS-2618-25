@@ -8,8 +8,11 @@ Now that we've added some basic tests, let's move straight into deploying our se
     Cisco NSO uses RESTCONF to provide a standardized, RESTful API interface for interacting with network configurations and services.
     
     - RESTCONF is a RESTful protocol for accessing and manipulating network configuration data defined in YANG models.
+
     - It provides a standardized HTTP-based interface for retrieving, configuring, and monitoring network settings.
+
     - Utilizes standard HTTP methods (GET, POST, PUT, DELETE) for operations and supports JSON or XML for data representation.
+
     - Aims to simplify network management with consistent interaction across diverse network elements.
 
 Below is a basic Python script to apply the service to the device `dev-dist-rtr01`. Please create a file named `apply.py` within the `nso_cicd` directory and copy the following contents into it. This script authenticates with the NSO development instance and applies the loopback service with a statically defined address of `10.100.66.1`. (Note: In a real-world scenario, using a static address like this could cause conflicts!)
