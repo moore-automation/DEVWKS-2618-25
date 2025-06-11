@@ -29,6 +29,6 @@ Here's a brief overview of the dCloud setup used in this lab:
 - **Production NSO:** The main NSO deployment manages network devices within the CML.
 - **Developer Workstation (DevBox):** A Linux VM for developing new services, running tests, and initiating pipelines.
 - **Developer Tools (DevTools):** Another Linux VM equipped with various tools needed for lab activities.
-- **NSO Instances:** Two NSO 6.2.5 instances serve as development and production environments.
+- **NSO Instances:** Two NSO 6.4.4 instances serve as development and production environments.
 
 ![Lab Topology](assets/topology_lab.jpg)
