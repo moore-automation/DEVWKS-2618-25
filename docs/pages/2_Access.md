@@ -37,7 +37,7 @@ Select the NSO bookmark in Google Chrome or click [NSO Development](http://10.10
 ---
 
 
-![D](../assets/devices.png)
+![NSO Devices](../assets/devices.png)
 
 <div class="instruction" markdown>
 

@@ -118,12 +118,13 @@ To enhance practicality and efficiency, you can replace your CI file with the pi
 # IMPORTANT: Always run pipeline on feature/dev branch BEFORE merging to main!
 
 include:
-  - '/nso_cicd/pipeline_utils/environments.yml'
+  - 'pipeline_utils/environments.yml'
 
 stages:
   - build
   - test
   - deliver
+  - deploy_feat
   - deploy_prod
 
 variables:

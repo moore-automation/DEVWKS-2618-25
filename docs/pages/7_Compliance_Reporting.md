@@ -2,7 +2,7 @@
 
 An important step in gaining acceptance of newly automated processes is providing visibility and assurance of their success. NSO Compliance Reporting is a feature within Cisco NSO that helps network operators assess and ensure that network device configurations adhere to predefined policies and standards. It enables automated auditing and reporting on compliance status across network elements, making it easier to identify and remediate configuration drift and inconsistencies in a timely manner.
 
-To get started, create a Python script in the `nso_cicd/` folder named `compliance.py` using the code provided below. Then, add the following line to your GitLab CI pipeline to execute the script after the apply script in the `apply_service` job.
+To get started, create a Python script in the `nso_cicd/` folder named `compliance.py` using the code provided below. Then, add the following line to your GitLab CI pipeline to execute the script after the apply script in the `apply-service` job.
 {: .instruction }
 
 ```python

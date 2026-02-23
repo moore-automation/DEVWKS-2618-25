@@ -2,7 +2,7 @@
 
 Now that we've added some basic tests, let's move straight into deploying our service!
 
-## Task 6: Apply the NSO Service
+## Task 8: Apply the NSO Service
 
 ??? note "**Reminder:** RESTCONF"
     Cisco NSO uses RESTCONF to provide a standardized, RESTful API interface for interacting with network configurations and services.
@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
 ```
 
-## Task 7: Update the Pipeline to Apply the Service
+## Task 9: Update the Pipeline to Apply the Service
 
 <div class="instruction" markdown>
 
@@ -124,16 +124,16 @@ Next, let's add a task to the pipeline to apply the service to `dev-dist-rtr01`.
 
 ```yaml
 apply-service:
-  stage: deploy_prod
+  stage: deploy_feat
   when: on_success
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH != "main"
       when: manual
       allow_failure: true
   script:
     - echo "Apply IOS"
     - python nso_cicd/apply.py --nso_url "http://$NSO_DEV_IP:8080" --device "dev-dist-rtr01" --username $NSO_DEV_USER --password $NSO_DEV_PWD
-  dependencies: [deploy-to-production]
+  needs: [test-loopback-service]
 ```
 
 !!! question "Has the configuration been applied to the device correctly?"

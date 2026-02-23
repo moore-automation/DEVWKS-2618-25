@@ -7,7 +7,7 @@
 # IMPORTANT: Always run pipeline on feature/dev branch BEFORE merging to main!
 
 include:
-  - '/nso_cicd/pipeline_utils/environments.yml'
+  - 'pipeline_utils/environments.yml'
 
 stages:
   - build
@@ -214,10 +214,11 @@ rollback-production:
 
 apply-service:
   stage: deploy_feat
-  when: on_success
   needs: [test-loopback-service]
   rules:
     - if: $CI_COMMIT_BRANCH != "main"
+      when: manual
+      allow_failure: true
   script:
     - set -eo pipefail
     - echo "Apply IOS"
