@@ -1,5 +1,8 @@
-# MkDocs build output
-site/
+# Vite build output (CI-only; not committed)
+docs/
+
+# Node
+site/node_modules/
 
 # Python
 __pycache__/
@@ -33,9 +36,6 @@ wheels/
 *.swo
 *~
 .DS_Store
-
-# MkDocs cache
-.cache/
 
 # Testing
 .pytest_cache/

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Hub / presentation: deep slate canvas (matches static hub palette) */
+body {
+  background-color: #0b1120;
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: auto;
+}
+
+/* Full-screen demo journeys: subtle grid + near-black base (ACI / CI diagram look) */
+.presentation-page {
+  background-color: #070b14;
+  background-image:
+    linear-gradient(rgba(71, 85, 105, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(71, 85, 105, 0.11) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-attachment: local;
+}
+
+.react-flow__node {
+  cursor: pointer;
+}
+
+.react-flow__edge-path {
+  stroke-width: 2;
+}
+
+.react-flow-controls-dark button {
+  background-color: #1e293b !important;
+  border-bottom: 1px solid #334155 !important;
+  color: #94a3b8 !important;
+}
+
+.react-flow-controls-dark button:hover {
+  background-color: #334155 !important;
+}
+
+.react-flow-controls-dark button svg {
+  fill: #94a3b8 !important;
+}
+
+.react-flow-controls-dark button:hover svg {
+  fill: #e2e8f0 !important;
+}

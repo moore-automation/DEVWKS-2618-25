@@ -1,0 +1,8 @@
+#!/bin/sh
+# Optional: git config core.hooksPath .githooks
+set -e
+cd "$(git rev-parse --show-toplevel)" || exit 1
+echo "pre-push: make docs-lint && make docs-build"
+make docs-lint
+make docs-build
+echo "pre-push: OK"

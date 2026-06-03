@@ -1,4 +1,4 @@
-from ats import aetest
+from pyats import aetest
 import requests
 import json
 import argparse
